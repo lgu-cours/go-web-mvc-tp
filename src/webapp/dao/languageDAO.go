@@ -14,7 +14,17 @@ var languages = []entities.Language {
 	entities.Language{ "GO", "Go lang" } }
 
 
-func GetLanguages() []entities.Language {
-	log.Print("DAO - GetLanguages() " )
+func FindAllLanguages() []entities.Language {
+	log.Print("DAO - FindAllLanguages() " )
 	return languages
+}
+func FindLanguage(code string) entities.Language {
+	log.Print("DAO - FindLanguage() " )
+	var language entities.Language 
+	for _, l := range languages {
+		if ( code == l.Code ) {
+			return l
+		}
+	}
+	return language
 }

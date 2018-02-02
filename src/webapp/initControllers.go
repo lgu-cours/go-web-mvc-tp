@@ -12,6 +12,6 @@ func initControllers() {
 
 	//http.HandleFunc("/students", controllers.StudentsController)
 
-	http.HandleFunc("/languages", controllers.LanguagesController)
+	http.HandleFunc("/language/list", controllers.LanguageListController)
 
 }

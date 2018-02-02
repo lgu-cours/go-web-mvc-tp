@@ -7,7 +7,7 @@ import (
 	"webapp/webutil"
 )
 
-func StudentsController(w http.ResponseWriter, r *http.Request) {
+func StudentController(w http.ResponseWriter, r *http.Request) {
 	log.Print("colorController - URL path '" + r.URL.Path )
 
 	switch r.Method {
