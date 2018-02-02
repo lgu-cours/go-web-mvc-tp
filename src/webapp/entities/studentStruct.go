@@ -1,0 +1,9 @@
+package entities
+
+type Student struct {
+        Id        int 
+        FirstName string
+        LastName  string
+        Age       int 
+        PreferedLanguage Language
+}
