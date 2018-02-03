@@ -10,8 +10,8 @@ func initControllers() {
 
 	// Specific Paths with specific controllers 
 
-	//http.HandleFunc("/students", controllers.StudentsController)
 
 	http.HandleFunc("/language/list", controllers.LanguageListController)
 
+	http.HandleFunc("/student/list", controllers.StudentListController)
 }

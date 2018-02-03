@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Languages</title>
+</head>
+
+<body>
+
+
+<h2>Students list </h2>
+
+<h3>{{len .}} student(s) found</h3>
+<ul>
+{{range .}}<li> {{.Id}} : {{.FirstName}} {{.LastName}}</li>
+{{end}}
+</ul>
+<br/><br/>
+
+</body>
+</html>
