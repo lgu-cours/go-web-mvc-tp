@@ -86,17 +86,49 @@ func (controller *StudentController)  processPost(w http.ResponseWriter, r *http
     
     switch submit {
     	case "create":
-			log.Print("doCreate" )
+	    	controller.processCreate(w,r)
     	case "delete":
-			log.Print("doDelete" )
+	    	controller.processDelete(w,r)
     	case "update":
 			log.Print("doUpdate" )
     	default:
+	    	webutil.ErrorPage(w, "Unexpected action ")
     }
-	//data := getStudentsList()
-	
-	// forward to initial page
-	//webutil.Forward(w, "templates/studentsList.gohtml", data)
+}
 
-	webutil.Forward(w, "templates/studentForm.gohtml", nil)
+func (controller *StudentController)  processCreate(w http.ResponseWriter, r *http.Request) {
+	log.Print("processCreate " )
+    r.ParseForm() // Parse url parameters passed, then parse the POST body (request body)
+    
+    id, _ := strconv.Atoi( r.Form.Get("id") )
+    firstname := r.Form.Get("firstname")
+    lastname  := r.Form.Get("lastname")
+    age, _ := strconv.Atoi( r.Form.Get("age") )
+    
+    student := entities.Student { Id: id,
+    	FirstName: firstname, 
+    	LastName: lastname, 
+    	Age: age }
+    
+    // TODO
+	// controller.StudentDAO.Create(student) 
+
+	var formData StudentFormData
+	formData.CreationMode = false
+	formData.Student = student 
+	
+	webutil.Forward(w, "templates/studentForm.gohtml", formData)
+}
+
+func (controller *StudentController)  processDelete(w http.ResponseWriter, r *http.Request) {
+	log.Print("processDelete " )
+    r.ParseForm() // Parse url parameters passed, then parse the POST body (request body)
+    
+    id, _ := strconv.Atoi( r.Form.Get("id") )
+    
+	log.Printf("processDelete id = %d", id )
+    // TODO
+	// controller.StudentDAO.Delete(id) 
+
+	controller.processList(w, r)
 }
