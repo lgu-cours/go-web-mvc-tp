@@ -3,9 +3,11 @@ package controllers
 import (
 	"log"
 	"net/http"
+	"strconv"
 	
 	"webapp/webutil"
 	"webapp/dao"
+	"webapp/entities"
 )
 
 func BuildNewStudentController() StudentController {
@@ -52,9 +54,22 @@ func (controller *StudentController) processList(w http.ResponseWriter, r *http.
 }
 
 func (controller *StudentController) processForm(w http.ResponseWriter, r *http.Request) {
+	var formData StudentFormData
+	formData.CreationMode = true
+	formData.Student = entities.Student{} // new Student with default values ( 'zero values' )
+	
+	id := webutil.GetParameter(r, "id") 
+	if  id != "" {
+		i, _ := strconv.Atoi(id)
+		student := controller.StudentDAO.Find(i)
+		if student != nil {
+			formData.CreationMode = false
+			formData.Student = *student
+		}
+	} 
 	
 	// forward to initial page
-	webutil.Forward(w, "templates/studentForm.gohtml", nil)
+	webutil.Forward(w, "templates/studentForm.gohtml", formData)
 }
 
 func (controller *StudentController)  processPost(w http.ResponseWriter, r *http.Request) {

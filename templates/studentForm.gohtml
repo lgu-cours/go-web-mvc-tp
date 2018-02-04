@@ -12,18 +12,28 @@
 
 <form action="/student/form" method="post">
 
-<!-- 
-<input type="text" name="firstname" placeholder="first name" value="{{.Name}}">
--->
-<input type="text" name="firstname" placeholder="first name" >
+<table>
+<tr><td>Id : </td>
+    <td><input type="text" name="id" value="{{if .CreationMode}}{{else}}{{.Student.Id}}{{end}}" 
+         {{if not .CreationMode}}disabled="disabled"{{ end }} ></td></tr>
+<tr><td>First name : </td>
+    <td><input type="text" name="firstname" value="{{.Student.FirstName}}" 
+         ></td></tr>
+<tr><td>Last name :  </td>
+    <td><input type="text" name="lastname"  value="{{.Student.LastName}}" 
+         ></td></tr>
+<tr><td>Age :        </td>
+    <td><input type="text" name="age"       value="{{.Student.Age}}"     
+         min="0" max="99"></td></tr>
 
-    <input type="hidden" name="action" value="submit" />
+</table>
 
-<!-- 
-make sure all html elements that have an ID are unique and name the buttons submit 
--->
-    <input id="update" type="submit" name="submit" value="update">
-    <input id="delete" type="submit" name="submit" value="delete">
+{{ if .CreationMode }}
+    <input id="createButton" type="submit" name="submit" value="create" >
+{{ else }}
+    <input id="updateButton" type="submit" name="submit" value="update">
+    <input id="deleteButton" type="submit" name="submit" value="delete">
+{{ end }}
 </form>
 
 </body>
