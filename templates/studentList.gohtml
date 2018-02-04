@@ -11,11 +11,13 @@
 <h2>Students list </h2>
 
 <h3>{{len .}} student(s) found</h3>
-<ul>
-{{range .}}<li> {{.Id}} : {{.FirstName}} {{.LastName}}</li>
+<table border="1">
+{{range .}}<tr><td> {{.Id}} </td>
+<td> {{.FirstName}} </td>
+<td> {{.LastName}} </td>
+<td> <a href="/student/form?id={{.Id}}">Edit</a> </td>
+</tr>
 {{end}}
-</ul>
-<br/><br/>
-
+</table>
 </body>
 </html>
