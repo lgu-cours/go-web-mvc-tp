@@ -18,6 +18,21 @@ func ErrorPage(w http.ResponseWriter, message string) {
     fmt.Fprint(w, "</html>")
 }
 
+func GetParameter(request *http.Request, name string) string {
+	
+	// r.URL.Query() returns a 'Values' type
+	// which is simply a map[string][]string of the QueryString parameters.
+	queryValues := request.URL.Query()
+	
+    // Query()["key"] will return an array of items, 
+    // we only want a single item => use the first one
+	values, ok := queryValues[name]
+    if ok && len(values) > 0 {
+	    return values[0]
+    }
+	return ""
+}
+
 func Forward(w http.ResponseWriter, filePath string, data interface{} ) {
 	
 	// Parse the template file

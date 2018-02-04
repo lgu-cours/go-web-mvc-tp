@@ -21,15 +21,16 @@ func StudentFormController(w http.ResponseWriter, r *http.Request) {
 }
 
 func processStudentsForm(w http.ResponseWriter, r *http.Request) {
-	// nothing to get from request
-	//data := getStudentsList()
 	
 	// forward to initial page
 	//webutil.Forward(w, "templates/studentsList.gohtml", data)
 }
 
 func doPost(w http.ResponseWriter, r *http.Request) {
-	// nothing to get from request
+//    r.ParseForm() // Parse url parameters passed, then parse the POST body (request body)
+//    firstname := r.Form.Get("id")
+//    lastname  := r.Form.Get("lastname")
+
 	//data := getStudentsList()
 	
 	// forward to initial page

@@ -28,8 +28,3 @@ func processStudentsList(w http.ResponseWriter, r *http.Request) {
 	// forward to view
 	webutil.Forward(w, "templates/studentList.gohtml", data)
 }
-
-//func getStudentsList() [] {
-//	// TODO
-//	return nil
-//}
