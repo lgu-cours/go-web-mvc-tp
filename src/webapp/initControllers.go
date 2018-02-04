@@ -19,8 +19,8 @@ func initControllers() {
 //	http.HandleFunc("/student/list", studentController.ListController )
 
 	studentController := controllers.BuildNewStudentController() 
-	http.HandleFunc("/student/list", studentController.ListController )
-	http.HandleFunc("/student/form", studentController.FormController )
+	http.HandleFunc("/student/list", studentController.ListHandler )
+	http.HandleFunc("/student/form", studentController.FormHandler )
 
 //	http.HandleFunc("/student/list", &controllers.BuildNewStudentController().ListController )
 

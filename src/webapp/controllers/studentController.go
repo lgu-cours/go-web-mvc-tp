@@ -16,7 +16,7 @@ type StudentController struct {
 	dao.StudentDAO // Struct composition
 }
 
-func (controller *StudentController) ListController(w http.ResponseWriter, r *http.Request) {
+func (controller *StudentController) ListHandler(w http.ResponseWriter, r *http.Request) {
 	log.Print("ListController - URL path '" + r.URL.Path )
 
 	if r.Method == "GET" {
@@ -26,7 +26,7 @@ func (controller *StudentController) ListController(w http.ResponseWriter, r *ht
 	}
 }
 
-func (controller *StudentController) FormController(w http.ResponseWriter, r *http.Request) {
+func (controller *StudentController) FormHandler(w http.ResponseWriter, r *http.Request) {
 	log.Print("FormController - URL path '" + r.URL.Path )
 
 	switch r.Method {
