@@ -58,10 +58,26 @@ func (controller *StudentController) processForm(w http.ResponseWriter, r *http.
 }
 
 func (controller *StudentController)  processPost(w http.ResponseWriter, r *http.Request) {
-//    r.ParseForm() // Parse url parameters passed, then parse the POST body (request body)
-//    firstname := r.Form.Get("id")
-//    lastname  := r.Form.Get("lastname")
+	log.Print("processPost " )
+	
+    r.ParseForm() // Parse url parameters passed, then parse the POST body (request body)
+    submit := r.Form.Get("submit")
+    firstname := r.Form.Get("firstname")
+    lastname  := r.Form.Get("lastname")
 
+	log.Print("processPost submit = " + submit )
+	log.Print("processPost firstname = " + firstname )
+	log.Print("processPost lastname  = " + lastname )
+    
+    switch submit {
+    	case "create":
+			log.Print("doCreate" )
+    	case "delete":
+			log.Print("doDelete" )
+    	case "update":
+			log.Print("doUpdate" )
+    	default:
+    }
 	//data := getStudentsList()
 	
 	// forward to initial page

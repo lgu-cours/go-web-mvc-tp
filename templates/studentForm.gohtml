@@ -10,7 +10,21 @@
 
 <h2>Students form </h2>
 
+<form action="/student/form" method="post">
 
+<!-- 
+<input type="text" name="firstname" placeholder="first name" value="{{.Name}}">
+-->
+<input type="text" name="firstname" placeholder="first name" >
+
+    <input type="hidden" name="action" value="submit" />
+
+<!-- 
+make sure all html elements that have an ID are unique and name the buttons submit 
+-->
+    <input id="update" type="submit" name="submit" value="update">
+    <input id="delete" type="submit" name="submit" value="delete">
+</form>
 
 </body>
 </html>
