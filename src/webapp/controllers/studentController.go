@@ -135,7 +135,7 @@ func (controller *StudentController)  processUpdate(w http.ResponseWriter, r *ht
     student := controller.buildStudent(r)
     
     // TODO
-	// controller.StudentDAO.Delete(id) 
+	// controller.StudentDAO.Update(id) 
 
 	var formData StudentFormData
 	formData.CreationMode = false
@@ -145,8 +145,9 @@ func (controller *StudentController)  processUpdate(w http.ResponseWriter, r *ht
 }
 
 func (controller *StudentController)  buildStudent(r *http.Request) entities.Student {
-	log.Print("buildStudent " )
     r.ParseForm() // Parse url parameters passed, then parse the POST body (request body)
+
+	log.Printf("buildStudent : %s ", r.Form.Get("id") )
     
     id, _ := strconv.Atoi( r.Form.Get("id") )
     firstname := r.Form.Get("firstname")
@@ -158,5 +159,6 @@ func (controller *StudentController)  buildStudent(r *http.Request) entities.Stu
     	LastName: lastname, 
     	Age: age }
     
+    log.Printf("buildStudent : %d %s %s %d ", student.Id, student.FirstName, student.LastName, student.Age  )
 	return student
 }
