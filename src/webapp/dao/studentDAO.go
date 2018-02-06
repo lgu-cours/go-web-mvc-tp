@@ -28,12 +28,6 @@ func (dao *StudentDAO) FindAll() []entities.Student {
 
 func (dao *StudentDAO) Find(id int) *entities.Student {
 	log.Printf("DAO - Find(%d) ", id )
-//	for _, student := range data.StudentsMap {
-//		if ( id == student.Id ) {
-//			return &student
-//		}
-//	}
-//	return nil
 	student := data.StudentsMap[id]
 	return &student
 }
@@ -45,5 +39,10 @@ func (dao *StudentDAO) Delete(id int) {
 
 func (dao *StudentDAO) Create(student entities.Student) {
 	log.Printf("DAO - Create(%d) ", student.Id )
+	data.StudentsMap[student.Id] = student 
+}
+
+func (dao *StudentDAO) Update(student entities.Student) {
+	log.Printf("DAO - Update(%d) ", student.Id )
 	data.StudentsMap[student.Id] = student 
 }

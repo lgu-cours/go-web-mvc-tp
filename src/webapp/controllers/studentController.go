@@ -118,8 +118,7 @@ func (controller *StudentController)  processUpdate(w http.ResponseWriter, r *ht
 	log.Print("processUpdate " )
     student := controller.buildStudent(r)
     
-    // TODO
-	// controller.StudentDAO.Update(id) 
+	controller.StudentDAO.Update(student) 
 
 	var formData StudentFormData
 	formData.CreationMode = false
