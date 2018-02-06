@@ -19,7 +19,7 @@ type StudentController struct {
 }
 
 func (controller *StudentController) ListHandler(w http.ResponseWriter, r *http.Request) {
-	log.Print("ListController - URL path '" + r.URL.Path )
+	log.Print("ListHandler - URL path '" + r.URL.Path )
 
 	if r.Method == "GET" {
 	    controller.processList(w,r)
@@ -29,7 +29,7 @@ func (controller *StudentController) ListHandler(w http.ResponseWriter, r *http.
 }
 
 func (controller *StudentController) FormHandler(w http.ResponseWriter, r *http.Request) {
-	log.Print("FormController - URL path '" + r.URL.Path )
+	log.Print("FormHandler - URL path '" + r.URL.Path )
 
 	switch r.Method {
 	case "GET":
@@ -43,17 +43,13 @@ func (controller *StudentController) FormHandler(w http.ResponseWriter, r *http.
 
 func (controller *StudentController) processList(w http.ResponseWriter, r *http.Request) {
 	// get data
-	//var dao = dao.StudentDAO()
-	
-//	mydao := dao.StudentDAO
-//	data := dao.FindAll()
-	
 	data := controller.StudentDAO.FindAll()
-	// forward to view
+	// forward to view ( list page )
 	webutil.Forward(w, "templates/studentList.gohtml", data)
 }
 
 func (controller *StudentController) processForm(w http.ResponseWriter, r *http.Request) {
+	// init form data
 	var formData StudentFormData
 	formData.CreationMode = true
 	formData.Student = entities.Student{} // new Student with default values ( 'zero values' )
@@ -68,7 +64,7 @@ func (controller *StudentController) processForm(w http.ResponseWriter, r *http.
 		}
 	} 
 	
-	// forward to initial page
+	// forward to view ( form page )
 	webutil.Forward(w, "templates/studentForm.gohtml", formData)
 }
 
@@ -94,21 +90,9 @@ func (controller *StudentController)  processPost(w http.ResponseWriter, r *http
 
 func (controller *StudentController)  processCreate(w http.ResponseWriter, r *http.Request) {
 	log.Print("processCreate " )
-//    r.ParseForm() // Parse url parameters passed, then parse the POST body (request body)
-//    
-//    id, _ := strconv.Atoi( r.Form.Get("id") )
-//    firstname := r.Form.Get("firstname")
-//    lastname  := r.Form.Get("lastname")
-//    age, _ := strconv.Atoi( r.Form.Get("age") )
-//    
-//    student := entities.Student { Id: id,
-//    	FirstName: firstname, 
-//    	LastName: lastname, 
-//    	Age: age }
     
     student := controller.buildStudent(r)
-    // TODO
-	// controller.StudentDAO.Create(student) 
+	controller.StudentDAO.Create(student) 
 
 	var formData StudentFormData
 	formData.CreationMode = false

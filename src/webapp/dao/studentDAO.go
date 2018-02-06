@@ -42,3 +42,8 @@ func (dao *StudentDAO) Delete(id int) {
 	log.Printf("DAO - Delete(%d) ", id )
 	delete(data.StudentsMap, id)
 }
+
+func (dao *StudentDAO) Create(student entities.Student) {
+	log.Printf("DAO - Create(%d) ", student.Id )
+	data.StudentsMap[student.Id] = student 
+}
