@@ -6,6 +6,5 @@ type Student struct {
         LastName  string
         Age       int 
         LanguageCode string
-        //PreferedLanguage Language
 }
 
