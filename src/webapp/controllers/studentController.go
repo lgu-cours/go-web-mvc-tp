@@ -123,9 +123,9 @@ func (controller *StudentController)  processDelete(w http.ResponseWriter, r *ht
     
     id, _ := strconv.Atoi( r.Form.Get("id") )
     
-	log.Printf("processDelete id = %d", id )
-    // TODO
-	// controller.StudentDAO.Delete(id) 
+	log.Printf("Delete : id = %d", id )
+	
+	controller.StudentDAO.Delete(id) 
 
 	controller.processList(w, r)
 }

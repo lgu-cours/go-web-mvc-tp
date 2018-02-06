@@ -12,17 +12,33 @@ import (
 type StudentDAO struct {
 }
 
+func values( m map[int]entities.Student ) []entities.Student  {
+	var a = make([]entities.Student, len(m))
+	i := 0
+    for _, v := range m {
+	    a[i] = v
+    	i++
+    }
+	return a
+}
 func (dao *StudentDAO) FindAll() []entities.Student {
 	log.Print("DAO - FindAll() " )
-	return data.StudentsData
+	return values(data.StudentsMap)
 }
 
 func (dao *StudentDAO) Find(id int) *entities.Student {
 	log.Printf("DAO - Find(%d) ", id )
-	for _, student := range data.StudentsData {
-		if ( id == student.Id ) {
-			return &student
-		}
-	}
-	return nil
+//	for _, student := range data.StudentsMap {
+//		if ( id == student.Id ) {
+//			return &student
+//		}
+//	}
+//	return nil
+	student := data.StudentsMap[id]
+	return &student
+}
+
+func (dao *StudentDAO) Delete(id int) {
+	log.Printf("DAO - Delete(%d) ", id )
+	delete(data.StudentsMap, id)
 }
