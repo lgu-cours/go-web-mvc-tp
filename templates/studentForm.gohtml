@@ -13,18 +13,34 @@
 <form action="/student/form" method="post">
 
 <table>
+
 <tr><td>Id : </td>
     <td><input type="text" name="id" value="{{if .CreationMode}}{{else}}{{.Student.Id}}{{end}}" 
          {{if not .CreationMode}}readonly="readonly"{{ end }} ></td></tr>
+         
 <tr><td>First name : </td>
     <td><input type="text" name="firstname" value="{{.Student.FirstName}}" 
          ></td></tr>
+         
 <tr><td>Last name :  </td>
     <td><input type="text" name="lastname"  value="{{.Student.LastName}}" 
          ></td></tr>
+         
 <tr><td>Age :        </td>
     <td><input type="text" name="age"       value="{{.Student.Age}}"     
          min="0" max="99"></td></tr>
+
+<tr><td>Prefered language :        </td>
+<td>
+<select>
+{{range .Languages}}<option value="{{.Code}}" {{if eq .Code $.Student.LanguageCode}}selected="selected"{{end}}>{{.Name}}</option>
+{{end}}
+<!-- 
+  <option value="vw">VW</option>
+  <option value="audi" selected>Audi</option>
+ -->
+</select>
+</td></tr>
 
 </table>
 
@@ -36,6 +52,8 @@
 {{ end }}
 &nbsp;&nbsp;<a href="/student/list">List</a> 
 </form>
+
+{{/* Len .Languages = {{len .Languages}} */}}
 
 </body>
 </html>

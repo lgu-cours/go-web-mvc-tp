@@ -50,9 +50,11 @@ func (controller *StudentController) processList(w http.ResponseWriter, r *http.
 
 func (controller *StudentController) processForm(w http.ResponseWriter, r *http.Request) {
 	// init form data
-	var formData StudentFormData
-	formData.CreationMode = true
-	formData.Student = entities.Student{} // new Student with default values ( 'zero values' )
+//	var formData StudentFormData
+//	formData.CreationMode = true
+//	formData.Student 
+	student := entities.Student{} // new Student with default values ( 'zero values' )
+	formData := NewStudentFormData(true, student)
 	
 	id := webutil.GetParameter(r, "id") 
 	if  id != "" {
@@ -94,10 +96,11 @@ func (controller *StudentController)  processCreate(w http.ResponseWriter, r *ht
     student := controller.buildStudent(r)
 	controller.StudentDAO.Create(student) 
 
-	var formData StudentFormData
-	formData.CreationMode = false
-	formData.Student = student 
-	
+//	var formData StudentFormData
+//	formData.CreationMode = false
+//	formData.Student = student 
+	formData := NewStudentFormData(false, student)
+		
 	webutil.Forward(w, "templates/studentForm.gohtml", formData)
 }
 
@@ -120,9 +123,11 @@ func (controller *StudentController)  processUpdate(w http.ResponseWriter, r *ht
     
 	controller.StudentDAO.Update(student) 
 
-	var formData StudentFormData
-	formData.CreationMode = false
-	formData.Student = student 
+//	var formData StudentFormData
+//	formData.CreationMode = false
+//	formData.Student = student 
+	
+	formData := NewStudentFormData(false, student)
 	
 	webutil.Forward(w, "templates/studentForm.gohtml", formData)
 }
