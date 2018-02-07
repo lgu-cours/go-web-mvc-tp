@@ -20,15 +20,14 @@ func (this *StudentDAO) values(m map[int]entities.Student) []entities.Student {
 		a[i] = v
 		i++
 	}
-	this.sortById(a);
+	this.sortById(a)
 	return a
 }
 
-func (this *StudentDAO) sortById(students []entities.Student) { // []entities.Student {
+func (this *StudentDAO) sortById(students []entities.Student) {
 	sort.Slice(students, func(i, j int) bool {
 		return students[i].Id < students[j].Id
 	})
-	// return students
 }
 
 func (this *StudentDAO) FindAll() []entities.Student {
