@@ -7,6 +7,16 @@ import (
 	"html/template"
 )
 
+func MessagePage(w http.ResponseWriter, message string) {
+    fmt.Fprint(w, "<!DOCTYPE html>")
+    fmt.Fprint(w, "<html>")
+    
+    fmt.Fprint(w, "<body>")
+    fmt.Fprintf(w, "<h2>%s</h2>\n", message)
+    fmt.Fprint(w, "</body>")
+
+    fmt.Fprint(w, "</html>")
+}
 func ErrorPage(w http.ResponseWriter, message string) {
     fmt.Fprint(w, "<!DOCTYPE html>")
     fmt.Fprint(w, "<html>")

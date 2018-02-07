@@ -11,7 +11,9 @@ func initControllers() {
 	// Specific Paths with specific controllers 
 
 
-	http.HandleFunc("/language/list", controllers.LanguageListController)
+	languageController := controllers.BuildNewLanguageController() 
+	http.HandleFunc("/language/list", languageController.ListHandler)
+	http.HandleFunc("/language/form", languageController.FormHandler)
 
 //	http.HandleFunc("/student/list1", controllers.StudentListController)
 	

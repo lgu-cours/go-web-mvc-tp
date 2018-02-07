@@ -12,7 +12,7 @@ import (
 type StudentDAO struct {
 }
 
-func values( m map[int]entities.Student ) []entities.Student  {
+func (dao *StudentDAO) values( m map[int]entities.Student ) []entities.Student  {
 	var a = make([]entities.Student, len(m))
 	i := 0
     for _, v := range m {
@@ -21,9 +21,10 @@ func values( m map[int]entities.Student ) []entities.Student  {
     }
 	return a
 }
+
 func (dao *StudentDAO) FindAll() []entities.Student {
 	log.Print("DAO - FindAll() " )
-	return values(data.StudentsMap)
+	return dao.values(data.StudentsMap)
 }
 
 func (dao *StudentDAO) Find(id int) *entities.Student {

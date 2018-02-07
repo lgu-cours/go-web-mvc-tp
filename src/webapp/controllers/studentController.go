@@ -15,48 +15,49 @@ func BuildNewStudentController() StudentController {
 }
 
 type StudentController struct {
-	dao.StudentDAO // Struct composition
+	dao           dao.StudentDAO
+	languagesDAO  dao.LanguageDAO 
 }
 
-func (controller *StudentController) ListHandler(w http.ResponseWriter, r *http.Request) {
+func (this *StudentController) ListHandler(w http.ResponseWriter, r *http.Request) {
 	log.Print("ListHandler - URL path '" + r.URL.Path )
 
 	if r.Method == "GET" {
-	    controller.processList(w,r)
+	    this.processList(w,r)
 	} else {
 	    webutil.ErrorPage(w, "Method "+r.Method+ " is not supported");
 	}
 }
 
-func (controller *StudentController) FormHandler(w http.ResponseWriter, r *http.Request) {
+func (this *StudentController) FormHandler(w http.ResponseWriter, r *http.Request) {
 	log.Print("FormHandler - URL path '" + r.URL.Path )
 
 	switch r.Method {
 	case "GET":
-	    controller.processForm(w,r)
+	    this.processForm(w,r)
 	case "POST":
-	    controller.processPost(w,r)
+	    this.processPost(w,r)
 	default:
 	    webutil.ErrorPage(w, "Method "+r.Method+ " is not supported");
 	}
 }
 
-func (controller *StudentController) processList(w http.ResponseWriter, r *http.Request) {
+func (this *StudentController) processList(w http.ResponseWriter, r *http.Request) {
 	// get data
-	data := controller.StudentDAO.FindAll()
+	data := this.dao.FindAll()
 	// forward to view ( list page )
 	webutil.Forward(w, "templates/studentList.gohtml", data)
 }
 
-func (controller *StudentController) processForm(w http.ResponseWriter, r *http.Request) {
+func (this *StudentController) processForm(w http.ResponseWriter, r *http.Request) {
 	// init form data
 	student := entities.Student{} // new Student with default values ( 'zero values' )
-	formData := NewStudentFormData(true, student)
+	formData := this.NewStudentFormData(true, student)
 	
 	id := webutil.GetParameter(r, "id") 
 	if  id != "" {
 		i, _ := strconv.Atoi(id)
-		student := controller.StudentDAO.Find(i)
+		student := this.dao.Find(i)
 		if student != nil {
 			formData.CreationMode = false
 			formData.Student = *student
@@ -67,7 +68,7 @@ func (controller *StudentController) processForm(w http.ResponseWriter, r *http.
 	webutil.Forward(w, "templates/studentForm.gohtml", formData)
 }
 
-func (controller *StudentController) processPost(w http.ResponseWriter, r *http.Request) {
+func (this *StudentController) processPost(w http.ResponseWriter, r *http.Request) {
 	log.Print("processPost " )
 	
     r.ParseForm() // Parse url parameters passed, then parse the POST body (request body)
@@ -77,28 +78,28 @@ func (controller *StudentController) processPost(w http.ResponseWriter, r *http.
     
     switch submit {
     	case "create":
-	    	controller.processCreate(w,r)
+	    	this.processCreate(w,r)
     	case "delete":
-	    	controller.processDelete(w,r)
+	    	this.processDelete(w,r)
     	case "update":
-			controller.processUpdate(w,r)
+			this.processUpdate(w,r)
     	default:
 	    	webutil.ErrorPage(w, "Unexpected action ")
     }
 }
 
-func (controller *StudentController)  processCreate(w http.ResponseWriter, r *http.Request) {
+func (this *StudentController)  processCreate(w http.ResponseWriter, r *http.Request) {
 	log.Print("processCreate " )
     
-    student := controller.buildStudent(r)
-	controller.StudentDAO.Create(student) 
+    student := this.buildStudent(r)
+	this.dao.Create(student) 
 
-	formData := NewStudentFormData(false, student)
+	formData := this.NewStudentFormData(false, student)
 		
 	webutil.Forward(w, "templates/studentForm.gohtml", formData)
 }
 
-func (controller *StudentController)  processDelete(w http.ResponseWriter, r *http.Request) {
+func (this *StudentController)  processDelete(w http.ResponseWriter, r *http.Request) {
 	log.Print("processDelete " )
     r.ParseForm() // Parse url parameters passed, then parse the POST body (request body)
     
@@ -106,23 +107,23 @@ func (controller *StudentController)  processDelete(w http.ResponseWriter, r *ht
     
 	log.Printf("Delete : id = %d", id )
 	
-	controller.StudentDAO.Delete(id) 
+	this.dao.Delete(id) 
 
-	controller.processList(w, r)
+	this.processList(w, r)
 }
 
-func (controller *StudentController)  processUpdate(w http.ResponseWriter, r *http.Request) {
+func (this *StudentController)  processUpdate(w http.ResponseWriter, r *http.Request) {
 	log.Print("processUpdate " )
-    student := controller.buildStudent(r)
+    student := this.buildStudent(r)
     
-	controller.StudentDAO.Update(student) 
+	this.dao.Update(student) 
 
-	formData := NewStudentFormData(false, student)
+	formData := this.NewStudentFormData(false, student)
 	
 	webutil.Forward(w, "templates/studentForm.gohtml", formData)
 }
 
-func (controller *StudentController)  buildStudent(r *http.Request) entities.Student {
+func (this *StudentController)  buildStudent(r *http.Request) entities.Student {
     r.ParseForm() // Parse url parameters passed, then parse the POST body (request body)
 
 	log.Printf("buildStudent..." )
@@ -137,4 +138,19 @@ func (controller *StudentController)  buildStudent(r *http.Request) entities.Stu
     //log.Printf("Student built : " + student.ToString() )
     log.Printf("Student built : " + student.String() )
 	return student
+}
+
+func (this *StudentController) NewStudentFormData(creationMode bool, student entities.Student ) StudentFormData {
+	// New structure
+	var formData StudentFormData
+	// Init structure fields
+	formData.CreationMode = creationMode
+	formData.Student      = student 
+	formData.Languages    = this.getLanguages()  // The current list of languages
+	// Return structure
+	return formData
+}
+
+func (this *StudentController) getLanguages() []entities.Language {
+	return this.languagesDAO.FindAll()
 }
