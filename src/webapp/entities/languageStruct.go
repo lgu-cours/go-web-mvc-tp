@@ -7,7 +7,7 @@ type Language struct {
         Name  string
 }
 
-func (this Language) ToString() string {
+func (this Language) String() string {
     return fmt.Sprintf(
     	"[%s, %s]", 
     	this.Code, 

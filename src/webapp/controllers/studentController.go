@@ -134,6 +134,7 @@ func (controller *StudentController)  buildStudent(r *http.Request) entities.Stu
     	Age: webutil.FormGetParamAsInt(r, "age", 0),
     	LanguageCode: r.Form.Get("languageCode") }
     
-    log.Printf("Student built : " + student.ToString() )
+    //log.Printf("Student built : " + student.ToString() )
+    log.Printf("Student built : " + student.String() )
 	return student
 }

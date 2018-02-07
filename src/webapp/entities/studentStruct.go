@@ -10,9 +10,9 @@ type Student struct {
         LanguageCode string
 }
 
-func (this Student) ToString() string {
+func (this Student) String() string {
     return fmt.Sprintf(
-    	"[%d, %s, %s, %d, %s]", 
+    	"[%d : %s, %s, %d, %s]", 
     	this.Id, 
     	this.FirstName, 
     	this.LastName, 
