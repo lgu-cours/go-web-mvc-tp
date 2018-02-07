@@ -2,6 +2,7 @@ package webutil
 
 import (
 	"fmt"
+	"strconv"
 	"net/http"	
 	"html/template"
 )
@@ -31,6 +32,24 @@ func GetParameter(request *http.Request, name string) string {
 	    return values[0]
     }
 	return ""
+}
+
+// Returns the request parameter for the given name 
+// NB : 'ParseForm()' must be called before using this function
+// . request : http request, 
+// . name : the parameter name
+// . defaultValue : the default value to be returned if parameter not found or void
+func FormGetParamAsInt(request *http.Request, name string, defaultValue int) int {
+   	v := request.Form.Get(name)
+   	if v != "" {
+   		// param found
+	    i, err := strconv.Atoi(v)
+		if err != nil {
+		    panic(err)
+		}
+	    return i
+   	} 
+   	return defaultValue
 }
 
 func Forward(w http.ResponseWriter, filePath string, data interface{} ) {

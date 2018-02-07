@@ -50,9 +50,6 @@ func (controller *StudentController) processList(w http.ResponseWriter, r *http.
 
 func (controller *StudentController) processForm(w http.ResponseWriter, r *http.Request) {
 	// init form data
-//	var formData StudentFormData
-//	formData.CreationMode = true
-//	formData.Student 
 	student := entities.Student{} // new Student with default values ( 'zero values' )
 	formData := NewStudentFormData(true, student)
 	
@@ -70,7 +67,7 @@ func (controller *StudentController) processForm(w http.ResponseWriter, r *http.
 	webutil.Forward(w, "templates/studentForm.gohtml", formData)
 }
 
-func (controller *StudentController)  processPost(w http.ResponseWriter, r *http.Request) {
+func (controller *StudentController) processPost(w http.ResponseWriter, r *http.Request) {
 	log.Print("processPost " )
 	
     r.ParseForm() // Parse url parameters passed, then parse the POST body (request body)
@@ -96,9 +93,6 @@ func (controller *StudentController)  processCreate(w http.ResponseWriter, r *ht
     student := controller.buildStudent(r)
 	controller.StudentDAO.Create(student) 
 
-//	var formData StudentFormData
-//	formData.CreationMode = false
-//	formData.Student = student 
 	formData := NewStudentFormData(false, student)
 		
 	webutil.Forward(w, "templates/studentForm.gohtml", formData)
@@ -123,10 +117,6 @@ func (controller *StudentController)  processUpdate(w http.ResponseWriter, r *ht
     
 	controller.StudentDAO.Update(student) 
 
-//	var formData StudentFormData
-//	formData.CreationMode = false
-//	formData.Student = student 
-	
 	formData := NewStudentFormData(false, student)
 	
 	webutil.Forward(w, "templates/studentForm.gohtml", formData)
@@ -135,18 +125,15 @@ func (controller *StudentController)  processUpdate(w http.ResponseWriter, r *ht
 func (controller *StudentController)  buildStudent(r *http.Request) entities.Student {
     r.ParseForm() // Parse url parameters passed, then parse the POST body (request body)
 
-	log.Printf("buildStudent : %s ", r.Form.Get("id") )
+	log.Printf("buildStudent..." )
     
-    id, _ := strconv.Atoi( r.Form.Get("id") )
-    firstname := r.Form.Get("firstname")
-    lastname  := r.Form.Get("lastname")
-    age, _ := strconv.Atoi( r.Form.Get("age") )
+    student := entities.Student { 
+    	Id: webutil.FormGetParamAsInt(r, "id", 0),
+    	FirstName: r.Form.Get("firstname"), 
+    	LastName: r.Form.Get("lastname"), 
+    	Age: webutil.FormGetParamAsInt(r, "age", 0),
+    	LanguageCode: r.Form.Get("languageCode") }
     
-    student := entities.Student { Id: id,
-    	FirstName: firstname, 
-    	LastName: lastname, 
-    	Age: age }
-    
-    log.Printf("buildStudent : %d %s %s %d ", student.Id, student.FirstName, student.LastName, student.Age  )
+    log.Printf("Student built : " + student.ToString() )
 	return student
 }

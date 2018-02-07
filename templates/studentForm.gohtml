@@ -32,7 +32,7 @@
 
 <tr><td>Prefered language :        </td>
 <td>
-<select>
+<select name="languageCode" >
 {{range .Languages}}<option value="{{.Code}}" {{if eq .Code $.Student.LanguageCode}}selected="selected"{{end}}>{{.Name}}</option>
 {{end}}
 <!-- 

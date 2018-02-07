@@ -1,5 +1,7 @@
 package entities
 
+import "fmt"
+
 type Student struct {
         Id        int 
         FirstName string
@@ -8,3 +10,12 @@ type Student struct {
         LanguageCode string
 }
 
+func (this Student) ToString() string {
+    return fmt.Sprintf(
+    	"[%d, %s, %s, %d, %s]", 
+    	this.Id, 
+    	this.FirstName, 
+    	this.LastName, 
+    	this.Age, 
+    	this.LanguageCode) 
+}
