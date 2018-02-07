@@ -12,7 +12,7 @@ import (
 type StudentDAO struct {
 }
 
-func (dao *StudentDAO) values( m map[int]entities.Student ) []entities.Student  {
+func (this *StudentDAO) values( m map[int]entities.Student ) []entities.Student  {
 	var a = make([]entities.Student, len(m))
 	i := 0
     for _, v := range m {
@@ -22,28 +22,28 @@ func (dao *StudentDAO) values( m map[int]entities.Student ) []entities.Student  
 	return a
 }
 
-func (dao *StudentDAO) FindAll() []entities.Student {
+func (this *StudentDAO) FindAll() []entities.Student {
 	log.Print("DAO - FindAll() " )
-	return dao.values(data.StudentsMap)
+	return this.values(data.StudentsMap)
 }
 
-func (dao *StudentDAO) Find(id int) *entities.Student {
+func (this *StudentDAO) Find(id int) *entities.Student {
 	log.Printf("DAO - Find(%d) ", id )
 	student := data.StudentsMap[id]
 	return &student
 }
 
-func (dao *StudentDAO) Delete(id int) {
+func (this *StudentDAO) Delete(id int) {
 	log.Printf("DAO - Delete(%d) ", id )
 	delete(data.StudentsMap, id)
 }
 
-func (dao *StudentDAO) Create(student entities.Student) {
+func (this *StudentDAO) Create(student entities.Student) {
 	log.Printf("DAO - Create(%d) ", student.Id )
 	data.StudentsMap[student.Id] = student 
 }
 
-func (dao *StudentDAO) Update(student entities.Student) {
+func (this *StudentDAO) Update(student entities.Student) {
 	log.Printf("DAO - Update(%d) ", student.Id )
 	data.StudentsMap[student.Id] = student 
 }

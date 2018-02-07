@@ -29,14 +29,6 @@ func (this *LanguageDAO) FindAll() []entities.Language {
 
 func (this *LanguageDAO) Find(code string) *entities.Language {
 	log.Printf("DAO - Find(%s) ", code )
-//	var language entities.Language 
-//	for _, l := range languages {
-//		if ( code == l.Code ) {
-//			return l
-//		}
-//	}
-//	return language
-	
 	language := data.LanguagesMap[code]
 	return &language
 
