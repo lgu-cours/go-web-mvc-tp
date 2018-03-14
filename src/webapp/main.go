@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 	
-	"webapp/utils"
+	utils "../utils"
 )
 
 const webDir  = "www"
@@ -17,12 +17,11 @@ func serveStaticFile(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	log.Print("Starting... ")
+	log.Print("Starting server... ")
 
 	utils.PrintEnv()
 
 	log.Print("Setting static file handler... ")
-	
 	// Set handler to serve static files
 	http.HandleFunc("/", serveStaticFile)			
 
