@@ -4,7 +4,6 @@ import (
 	"log"
 	"sort"
 
-	//data     "../data"
 	entities "../entities"
 )
 

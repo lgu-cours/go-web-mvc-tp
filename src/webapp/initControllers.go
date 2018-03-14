@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 	
-	"webapp/controllers"
+	controllers "../controllers"
 )
 
 func initControllers() {
