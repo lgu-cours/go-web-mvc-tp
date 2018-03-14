@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"webapp/entities"
+	entities "../entities"
 )
 
 type LanguageFormData struct {

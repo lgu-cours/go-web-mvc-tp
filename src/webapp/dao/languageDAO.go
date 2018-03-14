@@ -3,8 +3,7 @@ package dao
 import (
 	"log"
 	
-	"webapp/data"
-	"webapp/entities"
+	entities "../entities"
 )
 
 // This type/struct stores no state, it’s just a collection of methods 
@@ -24,12 +23,14 @@ func (this *LanguageDAO) values( m map[string]entities.Language ) []entities.Lan
 
 func (this *LanguageDAO) FindAll() []entities.Language {
 	log.Print("DAO - FindAll() " )
-	return this.values(data.LanguagesMap)
+	//return this.values(data.LanguagesMap)
+	return this.values(languagesMap)
 }
 
 func (this *LanguageDAO) Find(code string) *entities.Language {
 	log.Printf("DAO - Find(%s) ", code )
-	language := data.LanguagesMap[code]
+	//language := data.LanguagesMap[code]
+	language := languagesMap[code]
 	return &language
 
 }

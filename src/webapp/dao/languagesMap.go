@@ -1,10 +1,10 @@
-package data
+package dao
 
 import (
-	"webapp/entities"
+	entities "../entities"
 )
 
-var LanguagesMap = map[string]entities.Language {
+var languagesMap = map[string]entities.Language {
 	"JA" : { "JA", "Java" },
 	"JS" : { "JS", "JavaScript" },
 	"PH" : { "PH", "PHP" },

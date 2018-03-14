@@ -4,8 +4,8 @@ import (
 	"log"
 	"sort"
 
-	"webapp/data"
-	"webapp/entities"
+	//data     "../data"
+	entities "../entities"
 )
 
 // This type/struct stores no state, it’s just a collection of methods
@@ -32,26 +32,31 @@ func (this *StudentDAO) sortById(students []entities.Student) {
 
 func (this *StudentDAO) FindAll() []entities.Student {
 	log.Print("DAO - FindAll() ")
-	return this.values(data.StudentsMap)
+	//return this.values(data.StudentsMap)
+	return this.values(studentsMap)
 }
 
 func (this *StudentDAO) Find(id int) *entities.Student {
 	log.Printf("DAO - Find(%d) ", id)
-	student := data.StudentsMap[id]
+	//student := data.StudentsMap[id]
+	student := studentsMap[id]
 	return &student
 }
 
 func (this *StudentDAO) Delete(id int) {
 	log.Printf("DAO - Delete(%d) ", id)
-	delete(data.StudentsMap, id)
+	//delete(data.StudentsMap, id)
+	delete(studentsMap, id)
 }
 
 func (this *StudentDAO) Create(student entities.Student) {
 	log.Printf("DAO - Create(%d) ", student.Id)
-	data.StudentsMap[student.Id] = student
+	//data.StudentsMap[student.Id] = student
+	studentsMap[student.Id] = student
 }
 
 func (this *StudentDAO) Update(student entities.Student) {
 	log.Printf("DAO - Update(%d) ", student.Id)
-	data.StudentsMap[student.Id] = student
+	//data.StudentsMap[student.Id] = student
+	studentsMap[student.Id] = student
 }
