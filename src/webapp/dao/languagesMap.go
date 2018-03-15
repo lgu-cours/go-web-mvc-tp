@@ -4,6 +4,9 @@ import (
 	entities "../entities"
 )
 
+// map of LANGUAGES 
+// private ( visibility restricted to the current package )
+
 var languagesMap = map[string]entities.Language {
 	"JA" : { "JA", "Java" },
 	"JS" : { "JS", "JavaScript" },

@@ -4,7 +4,9 @@ import (
 	"log"
 	"net/http"
 	
-	utils "../utils"
+	"webapp/utils" // OK : keep full path for "go build"
+	// "utils" // ERROR : Cannot find package "utils" in any of .... ( GoPath) 
+	// utils "../utils" // ERROR : "src/utils" not found 
 )
 
 const webDir  = "www"

@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 	
-	controllers "../controllers"
+	"webapp/controllers"  // keep full path for "go build"
 )
 
 func initControllers() {

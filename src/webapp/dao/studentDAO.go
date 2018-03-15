@@ -12,6 +12,10 @@ import (
 type StudentDAO struct {
 }
 
+func NewStudentDAO() StudentDAO {
+	return StudentDAO{}
+}
+
 func (this *StudentDAO) values(m map[int]entities.Student) []entities.Student {
 	var a = make([]entities.Student, len(m))
 	i := 0
@@ -48,10 +52,16 @@ func (this *StudentDAO) Delete(id int) {
 	delete(studentsMap, id)
 }
 
-func (this *StudentDAO) Create(student entities.Student) {
+func (this *StudentDAO) Create(student entities.Student) bool {
 	log.Printf("DAO - Create(%d) ", student.Id)
-	//data.StudentsMap[student.Id] = student
-	studentsMap[student.Id] = student
+	if this.Find(student.Id) != nil {
+		// already exists => cannot create !
+		return false
+	} else {
+		// not found => create
+		studentsMap[student.Id] = student
+		return true
+	}
 }
 
 func (this *StudentDAO) Update(student entities.Student) {

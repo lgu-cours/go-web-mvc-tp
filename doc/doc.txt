@@ -1,0 +1,8 @@
+
+How to build : 
+
+In "webapp" folder :
+
+  go clean    :  removed "webapp/webapp.exe" if any
+  
+  go build    :  build the new executable "webapp/webapp.exe"
