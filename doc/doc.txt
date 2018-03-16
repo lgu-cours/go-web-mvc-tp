@@ -1,8 +1,30 @@
 
 How to build : 
 
-In "webapp" folder :
+In "src/webapp" folder :
+
+
+----------------------------------------------------------------------------
 
   go clean    :  removed "webapp/webapp.exe" if any
   
+     go clean -x to see the clean command
+     
+     // go clean launched by Eclipse :
+     go clean -i -x webapp webapp/controllers webapp/dao webapp/entities webapp/tests webapp/utils webapp/webutil
+     
+     
+----------------------------------------------------------------------------
+  
   go build    :  build the new executable "webapp/webapp.exe"
+  
+  NB : to build all the subpackages :
+    go build -v ./...    (with 3 points) allows to run build from everywhere
+    
+----------------------------------------------------------------------------
+  
+  Run all tests from everywhere :
+  
+  go test ./...
+  
+  

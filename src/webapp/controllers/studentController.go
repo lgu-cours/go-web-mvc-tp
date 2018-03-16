@@ -52,7 +52,7 @@ func (this *StudentController) processList(w http.ResponseWriter, r *http.Reques
 func (this *StudentController) processForm(w http.ResponseWriter, r *http.Request) {
 	// init form data
 	// student := entities.Student{} // new Student with default values ( 'zero values' )
-	student := NewStudent()
+	student := entities.NewStudent()
 	formData := this.NewStudentFormData(true, student)
 	
 	id := webutil.GetParameter(r, "id") 

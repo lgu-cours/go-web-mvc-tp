@@ -19,7 +19,7 @@ func serveStaticFile(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	log.Print("Starting server... ")
+	log.Print("Starting server ... ")
 
 	utils.PrintEnv()
 

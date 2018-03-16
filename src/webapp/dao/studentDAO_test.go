@@ -1,9 +1,9 @@
-package dao_test 
+package dao 
 
 import (
 	"testing"	
 	"fmt"
-	dao      "../dao"
+	// dao      "../dao"
 )
 
 // Student DAO Unit Testing 
@@ -12,7 +12,7 @@ import (
 func TestFind(t * testing.T ) {
 	    fmt.Println(t.Name()) // prints function name
 	    
-	    dao := dao.NewStudentDAO()
+	    dao := NewStudentDAO()
 		student := dao.Find(1)
 		
 		if student == nil {
@@ -26,7 +26,7 @@ func TestFind(t * testing.T ) {
 func TestFindAll(t * testing.T ) {
 	    fmt.Println(t.Name()) // prints function name
 	    
-	    dao := dao.NewStudentDAO()
+	    dao := NewStudentDAO()
 		students := dao.FindAll()
 		
 		fmt.Printf("%d students found\n", len(students))
