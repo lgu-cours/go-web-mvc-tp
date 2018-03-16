@@ -4,7 +4,8 @@ import (
 	"log"
 	"sort"
 
-	entities "../entities"
+	//entities "../entities"
+	"webapp/entities"
 )
 
 // This type/struct stores no state, it’s just a collection of methods
@@ -46,6 +47,16 @@ func (this *StudentDAO) Find(id int) *entities.Student {
 	return &student
 }
 
+func (this *StudentDAO) Exists(student entities.Student) bool {
+	log.Printf("DAO - Exists(%d) ", student.Id)
+	
+	// val, ok := dict["foo"]
+	
+	_, exists := studentsMap[student.Id]
+	log.Printf("DAO - Exists(%d) : ", student.Id, exists)
+	return exists
+}
+
 func (this *StudentDAO) Delete(id int) {
 	log.Printf("DAO - Delete(%d) ", id)
 	//delete(data.StudentsMap, id)
@@ -54,11 +65,14 @@ func (this *StudentDAO) Delete(id int) {
 
 func (this *StudentDAO) Create(student entities.Student) bool {
 	log.Printf("DAO - Create(%d) ", student.Id)
-	if this.Find(student.Id) != nil {
+	
+	if this.Exists(student) {
 		// already exists => cannot create !
+		log.Printf("DAO - Create(%d) : already exists => cannot create", student.Id)
 		return false
 	} else {
 		// not found => create
+		log.Printf("DAO - Create(%d) : not found => created", student.Id)
 		studentsMap[student.Id] = student
 		return true
 	}

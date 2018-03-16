@@ -21,6 +21,8 @@ In "src/webapp" folder :
   NB : to build all the subpackages :
     go build -v ./...    (with 3 points) allows to run build from everywhere
     
+  cf :  https://stackoverflow.com/questions/42399242/go-build-multiple-nested-packages 
+    
 ----------------------------------------------------------------------------
   
   Run all tests from everywhere :

@@ -1,0 +1,46 @@
+
+from env var : D:\GoPath;D:\go-project
+
+-----------------------------------------------------------------------------------
+changed to   : D:\GoPath 
+  NOT add project location to gopath
+  
+  => Err : Project is not contained in any GOPATH entry
+
+-----------------------------------------------------------------------------------
+changed to   : D:\GoPath 
+    + add project location to gopath
+
+go install error :
+   local import "../dao" in non-local package 
+
+-----------------------------------------------------------------------------------
+changed to   :  D:\GoPath;D:\workspaces-GOLANG\wks-47-go-td-univ\go-web-mvc-tp
+    NOT add project location to gopath
+    
+go install error :
+   local import "../dao" in non-local package
+   
+   
+-----------------------------------------------------------------------------------
+cf : https://stackoverflow.com/questions/30885098/go-local-import-in-non-local-package
+     "go install does not work at all with non-local imports."
+=> remove non-local imports :
+//	entities "../entities"
+	"webapp/entities"
+
+-----------------------------------------------------------------------------------
+OK, works with the following configuration (and without "non-local imports" in source files) :
+
+Go Compiler :
+
+  [x] Use project specific settings (checked)
+
+  Eclipse GOPATH : 
+  [ ] Use same value as the GOPATH env var (not checked)
+  Specific value : D:\GoPath
+  [x] Also add project location to GOPATH (checked)
+
+-----------------------------------------------------------------------------------
+  
+  

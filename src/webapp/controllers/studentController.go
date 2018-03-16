@@ -5,9 +5,12 @@ import (
 	"net/http"
 	"strconv"
 	
-	dao      "../dao"
-	entities "../entities"
-	webutil  "../webutil"
+//	dao      "../dao"
+//	entities "../entities"
+//	webutil  "../webutil"
+	"webapp/dao"
+	"webapp/entities"
+	"webapp/webutil"
 )
 
 func BuildNewStudentController() StudentController {

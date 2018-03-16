@@ -1,7 +1,9 @@
 package dao
 
 import (
-	entities "../entities"
+	//entities "../entities"
+	"webapp/entities"
+	
 )
 
 // map of students 

@@ -1,7 +1,8 @@
 package controllers
 
 import (
-	entities "../entities"
+//	entities "../entities"
+	"webapp/entities"
 )
 
 type StudentFormData struct {

@@ -3,7 +3,9 @@ package dao
 import (
 	"log"
 	
-	entities "../entities"
+	//entities "../entities"
+	"webapp/entities"
+	
 )
 
 // This type/struct stores no state, it’s just a collection of methods 

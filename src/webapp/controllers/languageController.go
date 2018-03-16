@@ -4,9 +4,13 @@ import (
 	"log"
 	"net/http"
 	
-	dao      "../dao"
-	entities "../entities"
-	webutil  "../webutil"
+//	dao      "../dao"
+//	entities "../entities"
+//	webutil  "../webutil"
+
+	"webapp/dao"
+	"webapp/entities"
+	"webapp/webutil"
 )
 
 func BuildNewLanguageController() LanguageController {

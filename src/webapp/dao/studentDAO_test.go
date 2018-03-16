@@ -3,7 +3,6 @@ package dao
 import (
 	"testing"	
 	"fmt"
-	// dao      "../dao"
 )
 
 // Student DAO Unit Testing 
